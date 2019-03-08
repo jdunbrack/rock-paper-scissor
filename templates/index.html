@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <style>
+            #rock, #paper, #scissors {
+                border: 1px solid black;
+                max-height: 400px;
+            }
+
+            form {
+                margin: 10px auto;
+            }
+        </style>
+    </head>
+    <body>
+        <h1> Rock, Paper, Scissors</h1>
+        <div class="container">
+            <img class="col-3" id="paper" src="{{url_for('static', filename='img/paper.gif') }}">
+            <img class="col-3" id="scissors" src="{{url_for('static', filename='img/scissors.png') }}">
+            <img class="col-3" id="rock" src="{{url_for('static', filename='img/rock.png') }}">
+        </div>
+        <form class="col-6" action="/results" method="post">
+            <p>
+                Pick one:
+                <select name="p_choice">
+                    <option value="rock" selected>Rock</option>
+                    <option value="scissors">Scissors</option>
+                    <option value="paper">Paper</option>
+                </select>
+                <input type="submit" value="Go!" class="btn btn-primary">
+            </p>
+        </form>
+
+        <br /><br /><br />
+        <div class="container results text-center">
+            {% if result != None %}
+                <p>You picked {{ player_choice }}.</p>
+                <p>Computer picked {{computer_choice}}.</p>
+                {% if result %}
+                    <p>You win!</p>
+                {% elif not result %}
+                    <p>You didn't win!</p>
+                {% endif %}
+            {% else %}
+                <p>You picked {{ player_choice }}.</p>
+                <p>Computer picked {{computer_choice}}.</p>
+                <p>Neither wins!</p>
+            {% endif %}
+        </div>
+    </body>
+</html>
